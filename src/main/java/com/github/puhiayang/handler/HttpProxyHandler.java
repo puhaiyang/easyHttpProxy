@@ -1,6 +1,8 @@
 package com.github.puhiayang.handler;
 
+import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.codec.http.HttpRequest;
 
 /**
  * 对http请求进行代理
@@ -9,4 +11,10 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * @author puhaiyang
  */
 public class HttpProxyHandler extends ChannelInboundHandlerAdapter {
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        if (msg instanceof HttpRequest) {
+
+        }
+    }
 }
