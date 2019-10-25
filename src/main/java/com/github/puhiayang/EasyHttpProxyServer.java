@@ -1,8 +1,8 @@
 package com.github.puhiayang;
 
 
-import com.github.puhiayang.handler.HttpProxyHandler;
-import com.github.puhiayang.handler.SocksProxyHandler;
+import com.github.puhiayang.handler.proxy.HttpProxyHandler;
+import com.github.puhiayang.handler.proxy.SocksProxyHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
