@@ -7,8 +7,11 @@ import com.github.puhiayang.utils.ProxyRequestUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.handler.codec.http.*;
+import io.netty.util.Attribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.github.puhiayang.bean.Constans.CLIENTREQUEST_ATTRIBUTE_KEY;
 
 /**
  * 对http请求进行代理
@@ -25,6 +28,9 @@ public class HttpProxyHandler extends ChannelInboundHandlerAdapter implements IP
             HttpRequest httpRequest = (HttpRequest) msg;
             //获取客户端请求
             ClientRequest clientRequest = ProxyRequestUtil.getClientReuqest(httpRequest);
+            //将clientRequest保存到channel中
+            Attribute<ClientRequest> clientRequestAttribute = ctx.channel().attr(CLIENTREQUEST_ATTRIBUTE_KEY);
+            clientRequestAttribute.setIfAbsent(clientRequest);
             //如果是connect代理请求，返回成功以代表代理成功
             if (sendSuccessResponseIfConnectMethod(ctx, httpRequest.method().name())) {
                 return;
