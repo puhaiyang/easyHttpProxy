@@ -65,4 +65,9 @@ public class SocksProxyHandler extends ChannelInboundHandlerAdapter implements I
             notHttpReuqstCf.channel().writeAndFlush(msg);
         }
     }
+
+    @Override
+    public void sendToClient(ClientRequest clientRequest, ChannelHandlerContext ctx, Object msg) {
+
+    }
 }

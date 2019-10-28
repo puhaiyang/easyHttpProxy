@@ -50,7 +50,13 @@ public class HttpProxyHandler extends ChannelInboundHandlerAdapter implements IP
                 ReferenceCountUtil.release(msg);
                 return;
             }
+            if (clientRequest.isHttps()) {
+                //https请求不在此处转发
+                super.channelRead(ctx, msg);
+                return;
+            }
             sendToServer(clientRequest, ctx, msg);
+            return;
         }
         super.channelRead(ctx, msg);
     }
@@ -101,6 +107,7 @@ public class HttpProxyHandler extends ChannelInboundHandlerAdapter implements IP
                 if (future.isSuccess()) {
                     //连接成功
                     future.channel().writeAndFlush(msg);
+                    logger.debug("[operationComplete] connect remote server success!");
                 } else {
                     //连接失败
                     logger.error("[operationComplete] 连接远程server失败了");
@@ -108,5 +115,10 @@ public class HttpProxyHandler extends ChannelInboundHandlerAdapter implements IP
                 }
             }
         });
+    }
+
+    @Override
+    public void sendToClient(ClientRequest clientRequest, ChannelHandlerContext ctx, Object msg) {
+
     }
 }
