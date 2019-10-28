@@ -2,7 +2,7 @@
 support http/https proxy.类似于fiddler,由java编写，代码简单便于理解。支持http/https代理！
 ## 生成ca根证书
 - 下载openssl工具
-> https://slproweb.com/products/Win32OpenSSL.html，在windows下默认会在C:\Program Files\Open SSL Win64目录下，需要将其配到path
+> [https://slproweb.com/products/Win32OpenSSL.html][https://slproweb.com/products/Win32OpenSSL.html]，在windows下默认会在C:\Program Files\Open SSL Win64目录下，需要将其配到path
 
 说明
 ```
@@ -29,3 +29,5 @@ support http/https proxy.类似于fiddler,由java编写，代码简单便于理�
 > openssl req -sha256 -new -x509 -days 36500 -key ca.key -out ca.crt -subj "/C=CN/ST=GD/L=SZ/O=lee/OU=study/CN=HaiyangProxy"
 - 将ca.key私钥转为der格式的私钥,输出ca_private.der文件
 > openssl pkcs8 -topk8 -nocrypt -inform PEM -outform DER -in ca.key -out ca_private.der
+
+[https://slproweb.com/products/Win32OpenSSL.html]: https://slproweb.com/products/Win32OpenSSL.html
