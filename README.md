@@ -6,9 +6,9 @@
 support http/https proxy.类似于fiddler,由java编写，代码简单便于理解。支持http/https代理！
 
 ## 环境
-[![jdk](https://img.shields.io/badge/jdk-1.8%2B-orange)](https://github.com/puhaiyang)
-[![jdk](https://img.shields.io/badge/netty-4.1%2B-orange)](https://github.com/puhaiyang)
-[![jdk](https://img.shields.io/badge/maven-3.0%2B-orange)](https://github.com/puhaiyang)
+[![jdk](https://img.shields.io/badge/jdk-1.8%2B-brightgreen)](https://github.com/puhaiyang)
+[![jdk](https://img.shields.io/badge/netty-4.1%2B-brightgreen)](https://github.com/puhaiyang)
+[![jdk](https://img.shields.io/badge/maven-3.0%2B-brightgreen)](https://github.com/puhaiyang)
 - jdk 1.8+
 - maven 3.0+
 - netty 4.1+
