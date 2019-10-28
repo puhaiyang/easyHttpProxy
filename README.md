@@ -27,7 +27,5 @@ support http/https proxy.类似于fiddler,由java编写，代码简单便于理�
 > openssl genrsa -des3 -out ca.key 2048
 - 生成ca根证书,以ca.key作为私钥,输出ca.crt证书
 > openssl req -sha256 -new -x509 -days 36500 -key ca.key -out ca.crt -subj "/C=CN/ST=GD/L=SZ/O=lee/OU=study/CN=HaiyangProxy"
-- 将ca.key私钥转为pkcs8格式的私钥,输出ca_private.pem文件
-> openssl pkcs8 -topk8 -nocrypt -inform PEM -outform DER -in ca.key -out ca_private.pem
-- 将pem的私钥转为der格式
-> rsa -in ca_private.pem -out ca_private.der -outform der
+- 将ca.key私钥转为der格式的私钥,输出ca_private.der文件
+> openssl pkcs8 -topk8 -nocrypt -inform PEM -outform DER -in ca.key -out ca_private.der
