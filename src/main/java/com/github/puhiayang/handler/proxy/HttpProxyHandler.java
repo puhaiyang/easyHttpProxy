@@ -43,10 +43,6 @@ public class HttpProxyHandler extends ChannelInboundHandlerAdapter implements IP
                 ctx.channel().pipeline().remove("httpRequestDecoder");
                 ctx.channel().pipeline().remove("httpResponseEncoder");
                 ctx.channel().pipeline().remove("httpAggregator");
-//                ctx.channel().pipeline().remove("httpProxyHandler");
-//                ctx.channel().pipeline().remove("httpsProxyHandler");
-//                ctx.channel().pipeline().remove("socksProxyHandler");
-
                 ReferenceCountUtil.release(msg);
                 return;
             }

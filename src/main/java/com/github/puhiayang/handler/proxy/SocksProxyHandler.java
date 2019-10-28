@@ -1,6 +1,7 @@
 package com.github.puhiayang.handler.proxy;
 
 import com.github.puhiayang.bean.ClientRequest;
+import com.github.puhiayang.handler.response.SocksResponseHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.util.Attribute;
@@ -42,12 +43,7 @@ public class SocksProxyHandler extends ChannelInboundHandlerAdapter implements I
                     .handler(new ChannelInitializer() {
                         @Override
                         protected void initChannel(Channel ch) throws Exception {
-                            ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
-                                @Override
-                                public void channelRead(ChannelHandlerContext ctx0, Object msg) throws Exception {
-                                    ctx.channel().writeAndFlush(msg);
-                                }
-                            });
+                            ch.pipeline().addLast(new SocksResponseHandler(ctx.channel()));
                         }
                     });
             notHttpReuqstCf = bootstrap.connect(clientRequest.getHost(), clientRequest.getPort());
