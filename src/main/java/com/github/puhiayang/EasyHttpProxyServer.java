@@ -12,6 +12,8 @@ import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -21,6 +23,7 @@ import io.netty.handler.logging.LoggingHandler;
  * @author puhaiyang
  */
 public class EasyHttpProxyServer {
+    private Logger logger = LoggerFactory.getLogger(EasyHttpProxyServer.class);
     private static EasyHttpProxyServer instace = new EasyHttpProxyServer();
 
     public static EasyHttpProxyServer getInstace() {
@@ -60,6 +63,7 @@ public class EasyHttpProxyServer {
                             ch.pipeline().addLast("socksProxyHandler", new SocksProxyHandler());
                         }
                     });
+            logger.info("[EasyHttpProxyServer] proxy server start on {} port", listenPort);
             ChannelFuture f = b
                     .bind(listenPort)
                     .sync();
