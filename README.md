@@ -1,5 +1,19 @@
 # easyHttpProxy
+[![author](https://img.shields.io/badge/author-puhaiyang-brightgreen)](https://github.com/puhaiyang)
+[![blog](https://img.shields.io/badge/blog-csdn-brightgreen)](https://blog.csdn.net/puhaiyang)
+[![License](https://img.shields.io/github/license/puhaiyang/easyHttpProxy)](https://github.com/puhaiyang/easyHttpProxy/blob/master/LICENSE)
+
 support http/https proxy.类似于fiddler,由java编写，代码简单便于理解。支持http/https代理！
+
+## 环境
+[![jdk](https://img.shields.io/badge/jdk-1.8%2B-orange)](https://github.com/puhaiyang)
+[![jdk](https://img.shields.io/badge/netty-4.1%2B-orange)](https://github.com/puhaiyang)
+[![jdk](https://img.shields.io/badge/maven-3.0%2B-orange)](https://github.com/puhaiyang)
+- jdk 1.8+
+- maven 3.0+
+- netty 4.1+
+
+
 ## 生成ca根证书
 - 下载openssl工具
 > [https://slproweb.com/products/Win32OpenSSL.html][https://slproweb.com/products/Win32OpenSSL.html]，在windows下默认会在C:\Program Files\Open SSL Win64目录下，需要将其配到path
