@@ -2,7 +2,11 @@ package com.github.puhiayang.utils;
 
 import com.github.puhiayang.bean.ClientRequest;
 import com.github.puhiayang.bean.Constans;
+import io.netty.channel.Channel;
 import io.netty.handler.codec.http.HttpRequest;
+import io.netty.util.Attribute;
+
+import static com.github.puhiayang.bean.Constans.CLIENTREQUEST_ATTRIBUTE_KEY;
 
 /**
  * 代理请求工具类
@@ -31,5 +35,14 @@ public class ProxyRequestUtil {
             port = 443;
         }
         return new ClientRequest(hostStrArr[0], port);
+    }
+
+    /**
+     * 从channel中获取clientRequest
+     */
+    public static ClientRequest getClientRequest(Channel channel) {
+        //将clientRequest保存到channel中
+        Attribute<ClientRequest> clientRequestAttribute = channel.attr(CLIENTREQUEST_ATTRIBUTE_KEY);
+        return clientRequestAttribute.get();
     }
 }

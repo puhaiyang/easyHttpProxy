@@ -8,6 +8,7 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.handler.codec.http.*;
 import io.netty.util.Attribute;
+import io.netty.util.ReferenceCountUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,19 +25,34 @@ public class HttpProxyHandler extends ChannelInboundHandlerAdapter implements IP
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        logger.debug("[HttpProxyHandler]");
         if (msg instanceof HttpRequest) {
             HttpRequest httpRequest = (HttpRequest) msg;
             //获取客户端请求
-            ClientRequest clientRequest = ProxyRequestUtil.getClientReuqest(httpRequest);
-            //将clientRequest保存到channel中
-            Attribute<ClientRequest> clientRequestAttribute = ctx.channel().attr(CLIENTREQUEST_ATTRIBUTE_KEY);
-            clientRequestAttribute.setIfAbsent(clientRequest);
+            ClientRequest clientRequest = ProxyRequestUtil.getClientRequest(ctx.channel());
+            if (clientRequest == null) {
+                //从本次请求中获取
+                Attribute<ClientRequest> clientRequestAttribute = ctx.channel().attr(CLIENTREQUEST_ATTRIBUTE_KEY);
+                clientRequest = ProxyRequestUtil.getClientReuqest(httpRequest);
+                //将clientRequest保存到channel中
+                clientRequestAttribute.setIfAbsent(clientRequest);
+            }
             //如果是connect代理请求，返回成功以代表代理成功
             if (sendSuccessResponseIfConnectMethod(ctx, httpRequest.method().name())) {
+                logger.debug("[HttpProxyHandler][channelRead] sendSuccessResponseConnect");
+                ctx.channel().pipeline().remove("httpRequestDecoder");
+                ctx.channel().pipeline().remove("httpResponseEncoder");
+                ctx.channel().pipeline().remove("httpAggregator");
+//                ctx.channel().pipeline().remove("httpProxyHandler");
+//                ctx.channel().pipeline().remove("httpsProxyHandler");
+//                ctx.channel().pipeline().remove("socksProxyHandler");
+
+                ReferenceCountUtil.release(msg);
                 return;
             }
             sendToServer(clientRequest, ctx, msg);
         }
+        super.channelRead(ctx, msg);
     }
 
     /**

@@ -27,6 +27,7 @@ public class HttpsProxyHandler extends ChannelInboundHandlerAdapter implements I
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        logger.debug("[HttpsProxyHandler]");
         ByteBuf byteBuf = (ByteBuf) msg;
         // ssl握手
         if (byteBuf.getByte(0) == 22) {

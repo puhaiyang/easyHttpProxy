@@ -2,6 +2,7 @@ package com.github.puhiayang;
 
 
 import com.github.puhiayang.handler.proxy.HttpProxyHandler;
+import com.github.puhiayang.handler.proxy.HttpsProxyHandler;
 import com.github.puhiayang.handler.proxy.SocksProxyHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -57,9 +58,9 @@ public class EasyHttpProxyServer {
                             ch.pipeline().addLast("httpRequestDecoder", new HttpRequestDecoder());
                             //发送响应给客户端，并将发送内容编码
                             ch.pipeline().addLast("httpResponseEncoder", new HttpResponseEncoder());
-                            ch.pipeline().addLast("http-aggregator", new HttpObjectAggregator(65536));
+                            ch.pipeline().addLast("httpAggregator", new HttpObjectAggregator(65536));
                             ch.pipeline().addLast("httpProxyHandler", new HttpProxyHandler());
-                            ch.pipeline().addLast("httpsProxyHandler", new HttpProxyHandler());
+                            ch.pipeline().addLast("httpsProxyHandler", new HttpsProxyHandler());
                             ch.pipeline().addLast("socksProxyHandler", new SocksProxyHandler());
                         }
                     });

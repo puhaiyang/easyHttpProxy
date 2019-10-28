@@ -4,6 +4,8 @@ import com.github.puhiayang.bean.ClientRequest;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.util.Attribute;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.github.puhiayang.bean.Constans.CLIENTREQUEST_ATTRIBUTE_KEY;
 
@@ -15,10 +17,13 @@ import static com.github.puhiayang.bean.Constans.CLIENTREQUEST_ATTRIBUTE_KEY;
  * created on 2019/10/25 20:56
  */
 public class SocksProxyHandler extends ChannelInboundHandlerAdapter implements IProxyHandler {
+    private Logger logger = LoggerFactory.getLogger(HttpsProxyHandler.class);
+
     private ChannelFuture notHttpReuqstCf;
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        logger.debug("[SocksProxyHandler]");
         Attribute<ClientRequest> clientRequestAttribute = ctx.channel().attr(CLIENTREQUEST_ATTRIBUTE_KEY);
         ClientRequest clientRequest = clientRequestAttribute.get();
         sendToServer(clientRequest, ctx, msg);
