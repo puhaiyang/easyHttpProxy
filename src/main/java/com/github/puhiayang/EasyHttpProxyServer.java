@@ -34,6 +34,15 @@ public class EasyHttpProxyServer {
         return instace;
     }
 
+    public static void main(String[] args) {
+        System.out.println("start proxy server");
+        int port = 6667;
+        if (args.length > 0) {
+            port = Integer.valueOf(args[0]);
+        }
+        new EasyHttpProxyServer().start(port);
+    }
+
     /**
      * 启动
      *
