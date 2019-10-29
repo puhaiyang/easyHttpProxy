@@ -167,7 +167,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>com.github.monkeywie.proxyee.HttpProxyServerApp</mainClass>
+                                    <mainClass>com.github.puhiayang.EasyHttpProxyServer</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
