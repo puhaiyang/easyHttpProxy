@@ -13,6 +13,17 @@ support http/https proxy.类似于fiddler,由java编写，代码简单便于理�
 - maven 3.0+
 - netty 4.1+
 
+## 使用方法
+添加依赖
+```
+<dependency>
+  <groupId>com.github.puhaiyang</groupId>
+  <artifactId>easy-http-proxy</artifactId>
+  <version>0.0.1</version>
+</dependency>
+```
+启动代理服务器：
+> EasyHttpProxyServer.getInstace().start(6667);
 
 ## 生成ca根证书
 - 下载openssl工具
