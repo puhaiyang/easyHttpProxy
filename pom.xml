@@ -63,7 +63,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.13</version>
         <!-- 日志依赖 end-->
         </dependency>
         <!-- netty -->
